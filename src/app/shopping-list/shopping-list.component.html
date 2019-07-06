@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row add-item" *ngIf="afAuth.user | async as user; else showLogin">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm welcome-display">
+          <h1>Welcome {{ email }}!</h1>
+        </div>
+      </div>
+      <div class="row" class="create-form">
+        <div class="col-sm">
+            <form (ngSubmit)="addItem()" #inputForm="ngForm">
+              <div class="form-group">
+                <label>Shopping Item</label>
+                <input type="text" class="form-control sibasi-input" id="createItem" required [(ngModel)]="createItem" name="createItemInputForm" #createItemInputForm="ngModel">
+              </div>
+              <div class="form-group">
+                <label>Price</label>
+                <input type="number" class="form-control sibasi-input" id="createItemPrice" required [(ngModel)]="createItemPrice" name="createItemPriceInputForm" #createItemPriceInputForm="ngModel">
+              </div>
+              <button type="submit" class="btn btn-success sibasi-button" [disabled]="!inputForm.form.valid">Add Item</button>
+              <button type="button" class="btn btn-danger logout-button sibasi-button" (click)="logoutUser()">Logout</button>
+            </form>
+          </div>
+      </div>
+      <div class="row display-item">
+        <div class="col-sm">
+          <div *ngFor="let shoppingItem of shoppingItems | async">
+            <div class='grocery-display'>
+              <div class="delete-button"><button type="button" class="btn btn-danger round-button" (click)="deleteItem(shoppingItem)">X</button></div>
+              <div class="grocery-item">
+                <div class="name-display">{{ shoppingItem.value }} - {{shoppingItem.price}}</div>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-info sibasi-button" (click)="toggleTotal()">Total</button>
+          <div *ngIf="showTotal">Total - {{shoppingTotal}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #showLogin>
+    <div class="row grocery-title">
+      <div class="col-sm">
+        <h1>Sibasi - Shopping list</h1>
+        <div class="lead">An Angular(Front-end) App that uses Firebase(Back-end) for shopping list!</div>
+      </div>
+    </div>
+    <div class="row auth">
+        <div class="col-sm">
+          <div class="auth" *ngIf="!showCreateUserInputForm && !showLoginUserInputForm">
+            <button type="button" class="btn btn-primary auth-button sibasi-button" (click)="showLoginUserForm()">Login</button>  
+            <button type="button" class="btn btn-success auth-button sibasi-button" (click)="showCreateUserForm()">Create Account</button>
+          </div>
+          <div *ngIf="showCreateUserInputForm">
+            <form (ngSubmit)="createUser(email, password)" #createForm="ngForm">
+              <div class="form-group">
+                <label for="createUserEmailInput">Create Email</label>
+                <input type="email" class="form-control sibasi-input" id="createEmail" required [(ngModel)]="email" name="createUserEmailInput" #createUserEmailInput="ngModel">
+                <label for="createUserPasswordInput">Create Password</label>
+                <input type="password" class="form-control sibasi-input" id="createPassword" required [(ngModel)]="password" name="createUserPassswordInput" #createUserPasswordInput="ngModel">
+              </div>
+              <div class="input-buttons">
+                <button type="submit" class="btn btn-success sibasi-button" [disabled]="!createForm.valid">create user</button>
+                <button type="button" class="btn btn-danger sibasi-button" (click)="cancelButton()">cancel</button>
+              </div>
+            </form>
+          </div>
+          <div *ngIf="showLoginUserInputForm">
+            <form (ngSubmit)="loginUser(email,password)" #loginForm="ngForm">
+              <div class="form-group">
+                <label for="loginUserEmailInput">Login Email</label>
+                <input type="email" class="form-control sibasi-input" id="loginEmail" required [(ngModel)]="email" name="loginUserEmailInput" #loginUserEmailInput="ngModel">
+                <label for="loginUserPasswordInput">Login Password</label>
+                <input type="password" class="form-control sibasi-input" id="loginPassword" required [(ngModel)]="password" name="loginUserPassswordInput" #loginUserPasswordInput="ngModel">
+              </div>
+              <div class="input-buttons">
+                <button type="submit" class="btn btn-success sibasi-button" [disabled]="!loginForm.valid">login user</button>
+                <button type="button" class="btn btn-danger sibasi-button" (click)="cancelButton()">cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </ng-template>
+</div>

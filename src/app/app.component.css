@@ -1,0 +1,9 @@
+body {
+    background-color: #bdc3c7;
+}
+
+.sibasi-button, .sibasi-input{
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
