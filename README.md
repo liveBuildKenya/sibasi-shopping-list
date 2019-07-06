@@ -1,4 +1,4 @@
-# Firebase Groceries
+# Firebase shopping list
 This is an open source Angular 7 shopping list app that uses Firebase Authentication and Cloud Firestore for storage
 
 
