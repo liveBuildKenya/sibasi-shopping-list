@@ -1,5 +1,5 @@
 # Firebase Groceries
-This is an open source Angular 7 grocery list app that uses Firebase Authentication and Cloud Firestore for storage
+This is an open source Angular 7 shopping list app that uses Firebase Authentication and Cloud Firestore for storage
 
 ## How to use the App
 - First you have to create a user account with your email
